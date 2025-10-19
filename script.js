@@ -5,8 +5,8 @@ let gameActive = false;
 let gameMode = null; // '2P' or 'VS_AI'
 
 // SEPARATE SCORE TRACKING FOR EACH MODE
-let humanVsHumanScores = { 'X': 0, 'O': 0 }; 
-let humanVsAiScores = { 'X': 0, 'O': 0 };     
+let humanVsHumanScores = { 'X': 0, 'O': 0 }; // Stores Player 1 (X) and Player 2 (O) scores
+let humanVsAiScores = { 'X': 0, 'O': 0 };     // Stores You (X) and Computer (O) scores
 
 // --- DOM Elements ---
 const cells = document.querySelectorAll('.cell');
@@ -31,12 +31,11 @@ const winConditions = [
 
 // --- Initialization ---
 
-// Add click listeners to cells
 cells.forEach(cell => {
     cell.addEventListener('click', handleCellClick);
 });
 
-// Add click listeners to the board itself to start a new round quickly
+// Listener for quick restart after a match ends
 gameBoard.addEventListener('click', handleBoardClick); 
 
 updateScoreDisplay(humanVsHumanScores);
@@ -152,10 +151,9 @@ function resetBoard() {
 }
 
 
-// --- Function for Quick Restart (FIXED) ---
+// --- Function for Quick Restart ---
 function handleBoardClick(event) {
-    // Crucial check: only restart if the game is NOT active AND the click originated from
-    // the main board container OR a cell (since cells have pointer-events: none)
+    // Only restart if the game is NOT active
     if (!gameActive && gameMode !== null) {
         // Prevent accidental restarts from button clicks that bubble up
         if (event.target.id !== 'back-button' && event.target.id !== 'reset-score-button') {
@@ -245,15 +243,15 @@ function endGame(message) {
     
     statusMessage.textContent = message + " Click the board to play again.";
     
-    // CRITICAL FIX: Ensure cells have no pointer interaction so the click goes to the board container
+    // CRITICAL: Disable pointer events on cells so the 'handleBoardClick' listener can fire on the board container.
     cells.forEach(cell => cell.style.pointerEvents = 'none');
     
-    // Add visual cue
+    // Add visual cue for restart
     gameBoard.style.cursor = 'pointer'; 
 }
 
 
-// --- AI Logic (No changes) ---
+// --- AI Logic ---
 function handleAITurn() {
     if (!gameActive || currentPlayer !== 'O') return;
 
