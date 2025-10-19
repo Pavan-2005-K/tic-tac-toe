@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        
+        <div id="score-panel" class="score-panel hidden-on-start">
+            <div class="score-box player-1-box">
+                <span class="player-label" id="player1-label">PLAYER 1</span>
+                <span class="player-icon player-x">X</span>
+                <span id="scoreX" class="score-number">0</span>
+            </div>
+            <div class="score-divider">
+                <span class="score-title">SCORE</span>
+                <span class="divider-line">|</span>
+            </div>
+            <div class="score-box player-2-box">
+                <span class="player-label" id="player2-label">PLAYER 2</span>
+                <span class="player-icon player-o">O</span>
+                <span id="scoreO" class="score-number">0</span>
+            </div>
+        </div>
+
+        <div id="mode-selection" class="mode-selection-screen">
+            <h2>Select Game Mode</h2>
+            <button onclick="startGame('2P')">Two Players</button>
+            <button onclick="startGame('VS_AI')">Vs. Computer</button>
+        </div>
+
+        <div id="game-board" class="board hidden">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <div id="bottom-panel" class="bottom-panel hidden-on-start">
+            
+            <div class="control-panel">
+                <button id="reset-score-button" class="reset-score-button" onclick="resetScores()">RESET SCORE</button>
+                <button id="back-button" class="back-button" onclick="resetGame()">BACK</button>
+            </div>
+
+            <div id="status-message" class="status-message">Select a mode to play.</div>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
